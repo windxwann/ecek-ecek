@@ -12,8 +12,8 @@
         <!-- Brand -->
         <div class="flex items-center justify-between h-16 px-6 bg-slate-950 border-b border-slate-800">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-2.5">
-                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
-                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+                    <i data-lucide="bike" class="w-6 h-6"></i>
                 </div>
                 <span class="text-lg font-bold text-white tracking-tight">Ride<span class="text-blue-500">Go</span></span>
             </a>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="px-4 py-3 border-b border-slate-800/60 bg-slate-900/60 flex items-center space-x-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold text-blue-500 border border-blue-600 uppercase tracking-wider">
                 Admin Panel
             </span>
             <span class="text-xs text-slate-400 truncate">{{ auth()->user()->nama }}</span>
@@ -34,7 +34,7 @@
             <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 mb-2">Utama</div>
 
             <a href="{{ route('admin.dashboard') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.dashboard') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.dashboard') ? 'text-white' : 'text-slate-400' }}"></i>
                 Dashboard
             </a>
@@ -42,25 +42,25 @@
             <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 mt-6 mb-2">Manajemen</div>
 
             <a href="{{ route('admin.users.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.users.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.users.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="users" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.users.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Kelola Pengguna
             </a>
 
             <a href="{{ route('admin.motors.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.motors.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.motors.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="bike" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.motors.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Motor & Verifikasi
             </a>
 
             <a href="{{ route('admin.rentals.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.rentals.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.rentals.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="clipboard-list" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.rentals.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Penyewaan
             </a>
 
             <a href="{{ route('admin.payments.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.payments.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.payments.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="credit-card" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.payments.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Pembayaran
             </a>
@@ -68,19 +68,19 @@
             <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 mt-6 mb-2">Laporan & Finansial</div>
 
             <a href="{{ route('admin.reports.revenue') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.reports.revenue') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.reports.revenue') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="trending-up" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.reports.revenue') ? 'text-white' : 'text-slate-400' }}"></i>
                 Laporan Pendapatan
             </a>
 
             <a href="{{ route('admin.reports.payments') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.reports.payments') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.reports.payments') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="receipt" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.reports.payments') ? 'text-white' : 'text-slate-400' }}"></i>
                 Laporan Pembayaran
             </a>
 
             <a href="{{ route('admin.reports.profit_sharing') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.reports.profit_sharing') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('admin.reports.profit_sharing') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="pie-chart" class="w-5 h-5 mr-3 {{ request()->routeIs('admin.reports.profit_sharing') ? 'text-white' : 'text-slate-400' }}"></i>
                 Laporan Bagi Hasil
             </a>
@@ -109,7 +109,7 @@
             <div class="flex items-center space-x-4">
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium text-slate-700 hover:text-slate-900 focus:outline-none">
-                        <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs uppercase">
+                        <span class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-xs uppercase">
                             {{ substr(auth()->user()->nama, 0, 2) }}
                         </span>
                         <span class="hidden sm:inline font-semibold">{{ auth()->user()->nama }}</span>

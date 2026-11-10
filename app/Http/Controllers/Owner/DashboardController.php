@@ -65,7 +65,7 @@ class DashboardController extends Controller
                 'settled_revenue' => (float) $settledRevenue,
             ],
             'recentRentals' => $recentRentals,
-            'chartData' => json_encode($chartData),
+            'chartData' => $chartData,
         ]);
     }
 }

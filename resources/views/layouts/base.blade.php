@@ -102,6 +102,10 @@
         aside.bg-slate-900 .text-emerald-500 { color: #2f7d32 !important; }
         aside.bg-slate-900 .text-blue-400 { color: #2f7d32 !important; }
         aside.bg-slate-900 .bg-blue-500\/10 { background-color: var(--accent-soft) !important; border-color: var(--accent) !important; }
+
+        /* Sembunyikan scrollbar bawaan tapi tetap bisa di-scroll */
+        *::-webkit-scrollbar { width: 0; height: 0; }
+        * { scrollbar-width: none; -ms-overflow-style: none; }
     </style>
 
     @stack('styles')

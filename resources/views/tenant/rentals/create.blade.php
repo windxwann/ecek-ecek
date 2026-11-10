@@ -56,7 +56,7 @@
 
             <!-- Tipe Durasi -->
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">Tipe Durasi Sewa</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">Tipe Durasi Sewa <span class="text-red-500 ml-0.5">*</span></label>
                 <div class="grid grid-cols-3 gap-2">
                     <label class="p-3 border rounded-xl cursor-pointer text-center transition"
                            :class="tipeDurasi === 'harian' ? 'border-blue-600 bg-blue-50/50 text-blue-700 font-bold' : 'border-slate-200 text-slate-700'">
@@ -84,7 +84,7 @@
             <!-- Tanggal Mulai & Selesai -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="tanggal_mulai" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Tanggal Mulai</label>
+                    <label for="tanggal_mulai" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Tanggal Mulai <span class="text-red-500 ml-0.5">*</span></label>
                     <input id="tanggal_mulai" name="tanggal_mulai" type="date" required
                            min="{{ date('Y-m-d') }}"
                            x-model="tanggalMulai" @change="calculate()"
@@ -93,7 +93,7 @@
                 </div>
 
                 <div>
-                    <label for="tanggal_selesai" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Tanggal Selesai</label>
+                    <label for="tanggal_selesai" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Tanggal Selesai <span class="text-red-500 ml-0.5">*</span></label>
                     <input id="tanggal_selesai" name="tanggal_selesai" type="date" required
                            :min="tanggalMulai || '{{ date('Y-m-d') }}'"
                            x-model="tanggalSelesai" @change="calculate()"

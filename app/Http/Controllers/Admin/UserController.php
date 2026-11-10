@@ -19,6 +19,13 @@ class UserController extends Controller
         $role = $request->query('role');
         $search = $request->query('q');
 
+        $roleCounts = [
+            'admin' => User::where('role', User::ROLE_ADMIN)->count(),
+            'pemilik' => User::where('role', User::ROLE_PEMILIK)->count(),
+            'penyewa' => User::where('role', User::ROLE_PENYEWA)->count(),
+            'total' => User::count(),
+        ];
+
         $users = User::query()
             ->when($role, fn ($q) => $q->where('role', $role))
             ->when($search, function ($q) use ($search) {
@@ -36,6 +43,7 @@ class UserController extends Controller
             'users' => $users,
             'currentRole' => $role,
             'search' => $search,
+            'roleCounts' => $roleCounts,
         ]);
     }
 
@@ -110,10 +118,20 @@ class UserController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
             'no_tlpn' => ['required', 'string', 'max:20'],
-            'role' => ['required', Rule::in([User::ROLE_ADMIN, User::ROLE_PEMILIK, User::ROLE_PENYEWA])],
+            'role' => ['sometimes', Rule::in([User::ROLE_ADMIN, User::ROLE_PEMILIK, User::ROLE_PENYEWA])],
             'password' => ['nullable', 'string', 'min:8'],
             'is_active' => ['required', 'boolean'],
         ]);
+
+        // Role terkunci (disabled di form), pertahankan role lama jika tidak dikirim.
+        if (! isset($data['role'])) {
+            $data['role'] = $user->role;
+        }
+
+        // Admin tidak boleh mengubah role akun adminnya sendiri menjadi non-admin.
+        if ($user->id === auth()->id() && $user->isAdmin() && $data['role'] !== User::ROLE_ADMIN) {
+            return back()->with('error', 'Anda tidak dapat mengubah role akun admin Anda sendiri.');
+        }
 
         if (! empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
@@ -144,6 +162,11 @@ class UserController extends Controller
     {
         if (auth()->id() === $user->id) {
             return back()->with('error', 'Anda tidak dapat menghapus akun sendiri.');
+        }
+
+        // Admin terakhir tidak boleh dihapus agar selalu ada backup admin.
+        if ($user->isAdmin() && User::where('role', User::ROLE_ADMIN)->count() <= 1) {
+            return back()->with('error', 'Minimal harus ada satu akun admin. Tidak dapat menghapus admin terakhir.');
         }
 
         $user->delete();

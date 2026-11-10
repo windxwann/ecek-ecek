@@ -5,23 +5,23 @@
 @section('content')
 <div class="space-y-8">
     <!-- Top Banner -->
-    <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100 mb-3">
                 <i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1.5"></i> Admin Control Center
             </span>
-            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Overview Sistem RideGo</h1>
-            <p class="text-slate-400 text-sm mt-1 max-w-xl">
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">Overview Sistem RideGo</h1>
+            <p class="text-slate-500 text-sm mt-1 max-w-xl">
                 Statistik terpusat pengguna, unit motor, transaksi keuangan, serta pembagian hasil.
             </p>
         </div>
         <div class="flex gap-2">
             <a href="{{ route('admin.motors.index', ['status' => 'menunggu_verifikasi']) }}"
-               class="inline-flex items-center px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow-md transition">
+               class="inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm transition-all duration-200 active:scale-95 border border-emerald-100 hover:-translate-y-[1px]">
                 <i data-lucide="check-square" class="w-4 h-4 mr-1.5"></i> Verifikasi Motor ({{ $counts['pending_motors'] }})
             </a>
             <a href="{{ route('admin.payments.index', ['status' => 'pending']) }}"
-               class="inline-flex items-center px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition">
+               class="inline-flex items-center px-4 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs shadow-sm transition-all duration-200 active:scale-95 border border-indigo-100 hover:-translate-y-[1px]">
                 <i data-lucide="credit-card" class="w-4 h-4 mr-1.5"></i> Cek Pembayaran ({{ $counts['pending_payments'] }})
             </a>
         </div>
@@ -132,7 +132,7 @@
                 <i data-lucide="clipboard-list" class="w-5 h-5 mr-2 text-blue-600"></i> 5 Transaksi Penyewaan Terbaru
             </h3>
             <a href="{{ route('admin.rentals.index') }}" class="text-xs font-bold text-blue-600 hover:underline">
-                Lihat Seluruh Pesanan
+                Lihat Seluruh Pesanan ->
             </a>
         </div>
 
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('adminRentalChart');
     if (!ctx) return;
 
-    const data = {!! $chartData !!};
+    const data = {{ json_encode($chartData) }};
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 
     new Chart(ctx, {

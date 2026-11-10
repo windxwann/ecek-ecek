@@ -8,7 +8,6 @@ use App\Services\ProfitSharingService;
 use App\Services\RentalService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class RentalController extends Controller
@@ -57,25 +56,6 @@ class RentalController extends Controller
         return view('admin.rentals.show', [
             'rental' => $rental,
         ]);
-    }
-
-    public function confirm(Penyewaan $rental): RedirectResponse
-    {
-        if ($rental->status !== Penyewaan::STATUS_WAITING_CONFIRMATION && $rental->status !== Penyewaan::STATUS_PENDING_PAYMENT) {
-            return back()->with('error', 'Status pesanan tidak valid untuk dikonfirmasi.');
-        }
-
-        $transaksi = $rental->transaksiTerakhir;
-        if ($transaksi && $transaksi->status === \App\Models\Transaksi::STATUS_PENDING) {
-            $transaksi->update(['status' => \App\Models\Transaksi::STATUS_SUCCESS]);
-        }
-
-        DB::transaction(function () use ($rental) {
-            $rental->update(['status' => Penyewaan::STATUS_BERJALAN]);
-            $rental->motor()->update(['status' => \App\Models\Motor::STATUS_RENTED]);
-        });
-
-        return back()->with('success', 'Pemesanan sewa motor berhasil dikonfirmasi.');
     }
 
     public function markOngoing(Penyewaan $rental): RedirectResponse

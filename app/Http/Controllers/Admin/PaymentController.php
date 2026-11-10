@@ -90,6 +90,11 @@ class PaymentController extends Controller
 
     public function edit(Transaksi $transaksi): View
     {
+        // Hanya transaksi yang belum dikonfirmasi yang dapat diedit.
+        if ($transaksi->status !== Transaksi::STATUS_PENDING) {
+            return back()->with('error', 'Transaksi yang sudah diverifikasi tidak dapat diedit.');
+        }
+
         $transaksi->load(['penyewaan.penyewa', 'penyewaan.motor']);
 
         $rentals = Penyewaan::query()
@@ -105,6 +110,11 @@ class PaymentController extends Controller
 
     public function update(Request $request, Transaksi $transaksi): RedirectResponse
     {
+        // Hanya transaksi yang belum dikonfirmasi yang dapat diperbarui.
+        if ($transaksi->status !== Transaksi::STATUS_PENDING) {
+            return back()->with('error', 'Transaksi yang sudah diverifikasi tidak dapat diperbarui.');
+        }
+
         $data = $this->validatePayment($request);
 
         DB::transaction(function () use ($request, $data, $transaksi) {
@@ -137,6 +147,11 @@ class PaymentController extends Controller
 
     public function destroy(Transaksi $transaksi): RedirectResponse
     {
+        // Hanya transaksi yang belum dikonfirmasi yang dapat dihapus.
+        if ($transaksi->status !== Transaksi::STATUS_PENDING) {
+            return back()->with('error', 'Transaksi yang sudah diverifikasi tidak dapat dihapus.');
+        }
+
         $this->paymentService->deleteProof($transaksi);
         $transaksi->delete();
 

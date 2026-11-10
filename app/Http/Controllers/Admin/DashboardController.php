@@ -70,7 +70,7 @@ class DashboardController extends Controller
             ],
             'recentRentals' => $recentRentals,
             'pendingVerifications' => $pendingVerifications,
-            'chartData' => json_encode($chartData),
+            'chartData' => $chartData,
         ]);
     }
 }

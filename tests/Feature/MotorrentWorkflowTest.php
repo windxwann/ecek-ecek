@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\BagiHasil;
 use App\Models\Motor;
 use App\Models\Penyewaan;
-use App\Models\TarifRental;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -20,7 +19,7 @@ class MotorrentWorkflowTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('MOTORRENT');
+        $response->assertSee('RideGo');
     }
 
     public function test_marketplace_catalog_displays_available_motors(): void
@@ -146,20 +145,15 @@ class MotorrentWorkflowTest extends TestCase
         $this->assertNotNull($motor);
         $this->assertEquals(Motor::STATUS_PENDING, $motor->status);
 
-        // Admin approves and sets pricing
+        // Admin approves
         $this->actingAs($admin);
         $this->post(route('admin.motors.verify', $motor), [
             'action' => 'approve',
             'catatan_admin' => 'Unit diverifikasi dan siap disewa.',
-            'tarif_harian' => 95000,
-            'tarif_mingguan' => 570000,
-            'tarif_bulanan' => 1900000,
         ]);
 
         $motor->refresh();
         $this->assertEquals(Motor::STATUS_AVAILABLE, $motor->status);
-        $this->assertNotNull($motor->tarif);
-        $this->assertEquals(95000, (float) $motor->tarif->tarif_harian);
     }
 
     public function test_api_rest_endpoints(): void

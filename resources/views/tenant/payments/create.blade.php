@@ -91,7 +91,7 @@
             </h3>
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">Foto / Screenshot Bukti Struk</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">Foto / Screenshot Bukti Struk <span class="text-red-500 ml-0.5">*</span></label>
                 <input type="file" name="bukti_pembayaran" required accept="image/jpeg,image/png,image/jpg,image/webp"
                        class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-slate-300 rounded-xl cursor-pointer focus:outline-none">
                 <p class="text-xs text-slate-400 mt-1.5">Format: JPG, PNG, atau WEBP. Maksimal ukuran 3MB.</p>

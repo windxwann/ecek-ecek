@@ -115,7 +115,6 @@
             </div>
             <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
                 <p>&copy; {{ date('Y') }} RideGo. Platform Rental Motor Terpercaya. All rights reserved.</p>
-                <p class="mt-2 sm:mt-0">Uji Kompetensi Keahlian (UJIKOM) RPL</p>
             </div>
         </div>
     </footer>

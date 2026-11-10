@@ -29,7 +29,7 @@
 
             <!-- Merk Motor -->
             <div>
-                <label for="merk" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Merk & Model Motor</label>
+                <label for="merk" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Merk & Model Motor <span class="text-red-500">*</span></label>
                 <input id="merk" name="merk" type="text" required value="{{ old('merk', $motor->merk) }}"
                        class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
                 @error('merk') <p class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</p> @enderror
@@ -38,7 +38,7 @@
             <!-- Tipe CC & Nomor Plat -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="tipe_cc" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Kapasitas Mesin (CC)</label>
+                    <label for="tipe_cc" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Kapasitas Mesin (CC) <span class="text-red-500">*</span></label>
                     <select id="tipe_cc" name="tipe_cc" required
                             class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
                         <option value="100" {{ old('tipe_cc', $motor->tipe_cc) === '100' ? 'selected' : '' }}>100 CC</option>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div>
-                    <label for="no_plat" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Nomor Polisi (Plat Nomor)</label>
+                    <label for="no_plat" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Nomor Polisi (Plat Nomor) <span class="text-red-500">*</span></label>
                     <input id="no_plat" name="no_plat" type="text" required value="{{ old('no_plat', $motor->no_plat) }}"
                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm uppercase font-mono focus:ring-2 focus:ring-emerald-600 focus:outline-none">
                     @error('no_plat') <p class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</p> @enderror

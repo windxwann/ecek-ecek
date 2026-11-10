@@ -99,17 +99,6 @@ class AdminController extends Controller
         ]);
     }
 
-    public function confirmRental(Penyewaan $rental): JsonResponse
-    {
-        $rental->update(['status' => Penyewaan::STATUS_CONFIRMED]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Pemesanan penyewaan berhasil dikonfirmasi.',
-            'data' => $rental,
-        ]);
-    }
-
     public function returnRental(Penyewaan $rental): JsonResponse
     {
         $this->rentalService->complete($rental, $this->profitSharingService);

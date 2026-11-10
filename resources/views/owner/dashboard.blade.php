@@ -5,18 +5,18 @@
 @section('content')
 <div class="space-y-8">
     <!-- Welcome Banner -->
-    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-emerald-500/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100 mb-3">
                 <i data-lucide="key" class="w-3.5 h-3.5 mr-1.5"></i> Portal Mitra Pemilik Kendaraan
             </span>
-            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Selamat Datang, {{ $user->nama }}! 👋</h1>
-            <p class="text-emerald-100 text-sm mt-1 max-w-xl">
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Selamat Datang, {{ $user->nama }}!</h1>
+            <p class="text-slate-500 text-sm mt-1 max-w-xl">
                 Pantau performa unit motor Anda, jadwal penyewaan, serta total pembagian hasil pendapatan rental.
             </p>
         </div>
         <a href="{{ route('owner.motors.create') }}"
-           class="inline-flex items-center px-5 py-3 rounded-2xl bg-white text-emerald-700 font-bold text-sm shadow-md hover:bg-emerald-50 transition">
+           class="inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm transition-all duration-200 active:scale-95 border border-emerald-100 hover:-translate-y-[1px]">
             <i data-lucide="plus" class="w-4 h-4 mr-2"></i> Daftarkan Motor Baru
         </a>
     </div>
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('ownerRentalChart');
     if (!ctx) return;
 
-    const data = {!! $chartData !!};
+    const data = {{ json_encode($chartData) }};
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 
     new Chart(ctx, {

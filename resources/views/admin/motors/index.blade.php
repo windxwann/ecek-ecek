@@ -62,7 +62,7 @@
                         <th class="py-3.5 px-4">Tarif (H/M/B)</th>
                         <th class="py-3.5 px-4">Dokumen</th>
                         <th class="py-3.5 px-4">Status</th>
-                        <th class="py-3.5 px-4 text-right">Aksi</th>
+                        <th class="py-3.5 px-4 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">

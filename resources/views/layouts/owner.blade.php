@@ -12,10 +12,10 @@
         <!-- Brand -->
         <div class="flex items-center justify-between h-16 px-6 bg-slate-950 border-b border-slate-800">
             <a href="{{ route('owner.dashboard') }}" class="flex items-center space-x-2.5">
-                <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">
-                    <i data-lucide="key" class="w-5 h-5"></i>
+                <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md">
+                    <i data-lucide="bike" class="w-5 h-5"></i>
                 </div>
-                <span class="text-lg font-bold text-white tracking-tight">Ride<span class="text-emerald-500">Go</span></span>
+                <span class="text-lg font-bold text-white tracking-tight">Ride<span class="text-blue-500">Go</span></span>
             </a>
             <button @click="sidebarOpen = false" class="text-slate-400 hover:text-white lg:hidden">
                 <i data-lucide="x" class="w-5 h-5"></i>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="px-4 py-3 border-b border-slate-800/60 bg-slate-900/60 flex items-center space-x-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold text-blue-600 border border-blue-600 uppercase tracking-wider">
                 Mitra Pemilik
             </span>
             <span class="text-xs text-slate-400 truncate">{{ auth()->user()->nama }}</span>
@@ -79,7 +79,7 @@
 
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium text-slate-700 hover:text-slate-900 focus:outline-none">
-                        <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs uppercase">
+                        <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs uppercase">
                             {{ substr(auth()->user()->nama, 0, 2) }}
                         </span>
                         <span class="hidden sm:inline font-semibold">{{ auth()->user()->nama }}</span>

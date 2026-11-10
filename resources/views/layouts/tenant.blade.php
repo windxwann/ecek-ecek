@@ -12,10 +12,10 @@
         <!-- Brand -->
         <div class="flex items-center justify-between h-16 px-6 bg-slate-950 border-b border-slate-800">
             <a href="{{ route('tenant.dashboard') }}" class="flex items-center space-x-2.5">
-                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
-                    <i data-lucide="bike" class="w-5 h-5"></i>
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+                    <i data-lucide="bike" class="w-6 h-6"></i>
                 </div>
-                <span class="text-lg font-bold text-white tracking-tight">Ride<span class="text-blue-500">Go</span></span>
+                <span class="text-lg font-bold text-white tracking-tight">Ride<span class="text-emerald-500">Go</span></span>
             </a>
             <button @click="sidebarOpen = false" class="text-slate-400 hover:text-white lg:hidden">
                 <i data-lucide="x" class="w-5 h-5"></i>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="px-4 py-3 border-b border-slate-800/60 bg-slate-900/60 flex items-center space-x-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
                 Penyewa
             </span>
             <span class="text-xs text-slate-400 truncate">{{ auth()->user()->nama }}</span>
@@ -32,25 +32,25 @@
         <!-- Navigation Menu -->
         <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
             <a href="{{ route('tenant.dashboard') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('tenant.dashboard') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('tenant.dashboard') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 {{ request()->routeIs('tenant.dashboard') ? 'text-white' : 'text-slate-400' }}"></i>
                 Dashboard
             </a>
 
             <a href="{{ route('marketplace.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('marketplace.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('marketplace.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="search" class="w-5 h-5 mr-3 {{ request()->routeIs('marketplace.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Cari & Sewa Motor
             </a>
 
             <a href="{{ route('tenant.rentals.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('tenant.rentals.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('tenant.rentals.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="calendar" class="w-5 h-5 mr-3 {{ request()->routeIs('tenant.rentals.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Riwayat Sewa
             </a>
 
             <a href="{{ route('tenant.payments.index') }}"
-               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('tenant.payments.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+               class="flex items-center px-3 py-2 text-sm font-medium rounded-xl transition {{ request()->routeIs('tenant.payments.*') ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                 <i data-lucide="credit-card" class="w-5 h-5 mr-3 {{ request()->routeIs('tenant.payments.*') ? 'text-white' : 'text-slate-400' }}"></i>
                 Riwayat Pembayaran
             </a>
@@ -76,13 +76,13 @@
 
             <!-- Profile Menu -->
             <div class="flex items-center space-x-4">
-                <a href="{{ route('marketplace.index') }}" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm">
+                <a href="{{ route('marketplace.index') }}" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition shadow-sm">
                     <i data-lucide="search" class="w-3.5 h-3.5 mr-1.5"></i> Sewa Motor
                 </a>
 
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium text-slate-700 hover:text-slate-900 focus:outline-none">
-                        <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs uppercase">
+                        <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs uppercase">
                             {{ substr(auth()->user()->nama, 0, 2) }}
                         </span>
                         <span class="hidden sm:inline font-semibold">{{ auth()->user()->nama }}</span>

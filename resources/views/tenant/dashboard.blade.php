@@ -10,7 +10,7 @@
             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm mb-3">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5 mr-1.5"></i> Portal Penyewa
             </span>
-            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Halo, {{ $user->nama }}! 👋</h1>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Halo, {{ $user->nama }}!</h1>
             <p class="text-blue-100 text-sm mt-1 max-w-xl">
                 Temukan motor pilihanmu atau pantau penyewaan yang sedang aktif dengan mudah.
             </p>

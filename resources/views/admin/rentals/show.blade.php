@@ -29,14 +29,7 @@
 
         <!-- Action Controls -->
         <div class="flex flex-wrap gap-2">
-            @if($rental->status === 'menunggu_konfirmasi')
-                <form method="POST" action="{{ route('admin.rentals.confirm', $rental) }}">
-                    @csrf
-                    <button type="submit" class="px-4 py-2 bg-white text-emerald-700 font-bold text-xs rounded-xl shadow-md hover:bg-emerald-50 transition">
-                        <i data-lucide="check" class="w-4 h-4 inline mr-1"></i> Konfirmasi Pesanan
-                    </button>
-                </form>
-            @elseif($rental->status === 'berjalan')
+            @if($rental->status === 'berjalan')
                 <form method="POST" action="{{ route('admin.rentals.return', $rental) }}"
                       onsubmit="return confirm('Konfirmasi pengembalian unit motor? Motor akan berstatus Tersedia dan bagi hasil otomatis dihitung.')">
                     @csrf
@@ -182,9 +175,9 @@
                             <span class="font-bold text-slate-900">{{ rupiah($tx->jumlah) }}</span>
                         </div>
                         @if($tx->bukti_pembayaran)
-                            <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between">
-                                <span class="text-slate-500">Bukti Transfer</span>
-                                <a href="{{ route('files.payment_proof', $tx) }}" target="_blank" class="text-blue-600 font-bold hover:underline flex items-center">
+                            <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between whitespace-nowrap">
+                                <span class="text-slate-500 whitespace-nowrap">Bukti Transfer</span>
+                                <a href="{{ route('files.payment_proof', $tx) }}" target="_blank" class="text-blue-600 font-bold hover:underline flex items-center whitespace-nowrap">
                                     <i data-lucide="external-link" class="w-3.5 h-3.5 mr-1"></i> Buka Gambar Bukti
                                 </a>
                             </div>
@@ -192,7 +185,7 @@
 
                         @if($tx->status === 'pending')
                             <div class="pt-2 flex gap-2">
-                                <form method="POST" action="{{ route('admin.payments.confirm', $tx) }}" class="flex-1">
+                                <form method="POST" action="{{ route('admin.payments.confirm', $tx) }}" class="flex-1" onsubmit="return swalConfirmPayment(this, 'Konfirmasi pembayaran #TRX-{{ $tx->id }}?', 'Transaksi akan ditandai berhasil dan status sewa akan diperbarui.')">
                                     @csrf
                                     <button type="submit" class="w-full py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs transition">
                                         Konfirmasi Lunas
@@ -254,3 +247,28 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function swalConfirmPayment(form, title, html) {
+        event.preventDefault();
+        Swal.fire({
+            title: title,
+            html: html,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Konfirmasi',
+            cancelButtonText: 'Batal',
+            confirmButtonColor: '#059669',
+            cancelButtonColor: '#64748b',
+            reverseButtons: true,
+            focusCancel: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+</script>
+@endpush

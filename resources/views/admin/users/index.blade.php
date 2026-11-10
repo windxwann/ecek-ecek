@@ -21,19 +21,19 @@
         <div class="flex overflow-x-auto space-x-2 text-xs font-semibold w-full sm:w-auto">
             <a href="{{ route('admin.users.index', ['q' => request('q')]) }}"
                class="px-3.5 py-2 rounded-xl whitespace-nowrap transition {{ empty($currentRole) ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                Semua
+                Semua ({{ $roleCounts['total'] ?? 0 }})
             </a>
             <a href="{{ route('admin.users.index', ['role' => 'admin', 'q' => request('q')]) }}"
                class="px-3.5 py-2 rounded-xl whitespace-nowrap transition {{ $currentRole === 'admin' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                Admin
+                Admin ({{ $roleCounts['admin'] ?? 0 }})
             </a>
             <a href="{{ route('admin.users.index', ['role' => 'pemilik', 'q' => request('q')]) }}"
                class="px-3.5 py-2 rounded-xl whitespace-nowrap transition {{ $currentRole === 'pemilik' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                Pemilik
+                Pemilik ({{ $roleCounts['pemilik'] ?? 0 }})
             </a>
             <a href="{{ route('admin.users.index', ['role' => 'penyewa', 'q' => request('q')]) }}"
                class="px-3.5 py-2 rounded-xl whitespace-nowrap transition {{ $currentRole === 'penyewa' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                Penyewa
+                Penyewa ({{ $roleCounts['penyewa'] ?? 0 }})
             </a>
         </div>
 
@@ -61,7 +61,7 @@
                         <th class="py-3.5 px-4">Role</th>
                         <th class="py-3.5 px-4">Status Akun</th>
                         <th class="py-3.5 px-4">Terdaftar</th>
-                        <th class="py-3.5 px-4 text-right">Aksi</th>
+                        <th class="py-3.5 px-4 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">

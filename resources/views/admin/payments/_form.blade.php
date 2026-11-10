@@ -2,7 +2,7 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div class="sm:col-span-2">
-        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Penyewaan / Pesanan</label>
+        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Penyewaan / Pesanan <span class="text-red-500 ml-0.5">*</span></label>
         <select name="pemesanan_id" required
                 class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
             <option value="">-- Pilih Pesanan --</option>
@@ -19,7 +19,7 @@
     </div>
 
     <div>
-        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Jumlah Pembayaran (Rp)</label>
+        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Jumlah Pembayaran (Rp) <span class="text-red-500 ml-0.5">*</span></label>
         <input type="number" name="jumlah" min="0" step="100" required
                value="{{ old('jumlah', $transaksi?->jumlah ?? '') }}"
                class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
@@ -27,7 +27,7 @@
     </div>
 
     <div>
-        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Tanggal Pembayaran</label>
+        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Tanggal Pembayaran <span class="text-red-500 ml-0.5">*</span></label>
         <input type="datetime-local" name="tanggal" required
                value="{{ old('tanggal', optional($transaksi?->tanggal)->format('Y-m-d\TH:i') ?? now()->format('Y-m-d\TH:i')) }}"
                class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
@@ -35,7 +35,7 @@
     </div>
 
     <div>
-        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Metode Pembayaran</label>
+        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Metode Pembayaran <span class="text-red-500 ml-0.5">*</span></label>
         <select name="metode_pembayaran" required
                 class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
             @foreach(config('rental.payment_methods') as $value => $label)
@@ -48,7 +48,7 @@
     </div>
 
     <div>
-        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Status Transaksi</label>
+        <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Status Transaksi <span class="text-red-500 ml-0.5">*</span></label>
         <select name="status" required
                 class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
             <option value="pending" {{ old('status', $transaksi?->status ?? 'pending') === 'pending' ? 'selected' : '' }}>Menunggu</option>

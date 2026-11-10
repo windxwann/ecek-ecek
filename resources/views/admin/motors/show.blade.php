@@ -109,28 +109,6 @@
                           class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">{{ old('catatan_admin', $motor->catatan_admin) }}</textarea>
             </div>
 
-            <!-- Set Initial Pricing if approved -->
-            <div class="pt-3 border-t border-slate-100">
-                <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Tetapkan Tarif Rental</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Harian (Rp)</label>
-                        <input type="number" name="tarif_harian" value="{{ old('tarif_harian', $motor->tarif?->tarif_harian ?? 80000) }}" min="0" step="1000"
-                               class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Mingguan (Rp)</label>
-                        <input type="number" name="tarif_mingguan" value="{{ old('tarif_mingguan', $motor->tarif?->tarif_mingguan ?? 480000) }}" min="0" step="1000"
-                               class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Bulanan (Rp)</label>
-                        <input type="number" name="tarif_bulanan" value="{{ old('tarif_bulanan', $motor->tarif?->tarif_bulanan ?? 1600000) }}" min="0" step="1000"
-                               class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                </div>
-            </div>
-
             <div class="pt-2 flex justify-end">
                 <button type="submit" class="py-2.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition">
                     Simpan Keputusan Verifikasi
@@ -166,30 +144,32 @@
             </p>
         @endif
 
-        <form method="POST" action="{{ route('admin.motors.pricing', $motor) }}" class="space-y-4">
+        <form id="admin-pricing-form" method="POST" action="{{ route('admin.motors.pricing', $motor) }}" class="space-y-4">
             @csrf
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Harian (Rp)</label>
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Harian (Rp) <span class="text-red-500 ml-0.5">*</span></label>
                     <input type="number" name="tarif_harian" value="{{ old('tarif_harian', $motor->tarif?->tarif_harian ?? 80000) }}" min="1000" step="1000" required
+                           data-current="{{ $motor->tarif?->tarif_harian ?? '' }}"
                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Mingguan (Rp)</label>
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Mingguan (Rp) <span class="text-red-500 ml-0.5">*</span></label>
                     <input type="number" name="tarif_mingguan" value="{{ old('tarif_mingguan', $motor->tarif?->tarif_mingguan ?? 480000) }}" min="1000" step="1000" required
+                           data-current="{{ $motor->tarif?->tarif_mingguan ?? '' }}"
                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Bulanan (Rp)</label>
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Tarif Bulanan (Rp) <span class="text-red-500 ml-0.5">*</span></label>
                     <input type="number" name="tarif_bulanan" value="{{ old('tarif_bulanan', $motor->tarif?->tarif_bulanan ?? 1600000) }}" min="1000" step="1000" required
+                           data-current="{{ $motor->tarif?->tarif_bulanan ?? '' }}"
                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                 </div>
             </div>
 
             <div class="flex items-center justify-between pt-2">
                 @if($motor->tarif)
-                    <button type="button"
-                            onclick="if (confirm('Hapus tarif rental motor ini? Motor akan dinonaktifkan dari katalog.')) { document.getElementById('delete-pricing-{{ $motor->id }}').submit(); }"
+                    <button type="button" id="admin-pricing-delete"
                             class="px-4 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs border border-red-200 transition">
                         <i data-lucide="trash-2" class="w-4 h-4 mr-1 inline"></i> Hapus Tarif
                     </button>
@@ -201,6 +181,8 @@
                     Simpan Tarif Rental
                 </button>
             </div>
+
+            <p class="text-[11px] text-slate-400">Perubahan tarif memerlukan konfirmasi sebelum disimpan.</p>
         </form>
 
         @if($motor->tarif)
@@ -233,3 +215,94 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (! window.Swal) return;
+
+        const rupiah = (value) => 'Rp ' + Number(value || 0).toLocaleString('id-ID');
+        const motorLabel = @json($motor->merk.' ('.$motor->no_plat.')');
+        const pricingForm = document.getElementById('admin-pricing-form');
+        const deleteButton = document.getElementById('admin-pricing-delete');
+        const deleteForm = document.getElementById('delete-pricing-{{ $motor->id }}');
+
+        /**
+         * Konfirmasi sekali: menampilkan ringkasan data lalu menjalankan aksi
+         * hanya jika pengguna menyetujuinya.
+         */
+        async function confirmOnce(summaryHtml, confirmText, danger) {
+            const result = await Swal.fire({
+                icon: danger ? 'warning' : 'question',
+                title: danger ? 'Hapus Tarif Rental?' : 'Simpan Perubahan Tarif?',
+                html: summaryHtml,
+                showCancelButton: true,
+                confirmButtonText: confirmText,
+                cancelButtonText: 'Batal',
+                confirmButtonColor: danger ? '#dc2626' : '#0f172a',
+                cancelButtonColor: '#64748b',
+                reverseButtons: true,
+                focusCancel: true,
+            });
+
+            return result.isConfirmed;
+        }
+
+        if (pricingForm) {
+            pricingForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const rates = [
+                    { label: 'Harian', field: 'tarif_harian' },
+                    { label: 'Mingguan', field: 'tarif_mingguan' },
+                    { label: 'Bulanan', field: 'tarif_bulanan' },
+                ];
+
+                const rows = rates.map(function (rate) {
+                    const input = pricingForm.querySelector('[name="' + rate.field + '"]');
+                    const before = input.dataset.current === '' ? null : Number(input.dataset.current);
+                    const after = Number(input.value || 0);
+                    const changed = before === null || before !== after;
+
+                    return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #e2e8f0;">'
+                        + '<span style="color:#64748b;">' + rate.label + '</span>'
+                        + '<span style="font-weight:600;">' + (before === null ? 'Belum ada' : rupiah(before))
+                        + (changed
+                            ? ' <span style="color:#b45309;">&rarr; ' + rupiah(after) + '</span>'
+                            : ' <span style="color:#94a3b8;">(tidak berubah)</span>')
+                        + '</span></div>';
+                }).join('');
+
+                const summary = '<p style="font-size:12px;color:#64748b;margin:0 0 8px;">Tarif untuk ' + motorLabel + '</p>'
+                    + '<div style="text-align:left;font-size:13px;">' + rows + '</div>';
+
+                const confirmed = await confirmOnce(
+                    summary,
+                    'Ya, Simpan Tarif',
+                    false
+                );
+
+                if (confirmed) pricingForm.submit();
+            });
+        }
+
+        if (deleteButton && deleteForm) {
+            deleteButton.addEventListener('click', async function () {
+                const summary = '<div style="text-align:left;font-size:13px;line-height:1.7;">'
+                    + 'Menghapus seluruh tarif rental untuk <b>' + motorLabel + '</b>.<br>'
+                    + 'Motor yang sedang berstatus <b>Tersedia</b> akan otomatis dinonaktifkan dari katalog.<br>'
+                    + '<span style="color:#b45309;">Tarif yang dihapus tidak dapat dipulihkan.</span>'
+                    + '</div>';
+
+                const confirmed = await confirmOnce(
+                    summary,
+                    'Ya, Hapus Tarif',
+                    true
+                );
+
+                if (confirmed) deleteForm.submit();
+            });
+        }
+    });
+</script>
+@endpush

@@ -76,7 +76,6 @@ Route::middleware('auth')->group(function () {
         // Rental Management & Returns
         Route::get('/rentals', [Admin\RentalController::class, 'index'])->name('rentals.index');
         Route::get('/rentals/{rental}', [Admin\RentalController::class, 'show'])->name('rentals.show');
-        Route::post('/rentals/{rental}/confirm', [Admin\RentalController::class, 'confirm'])->name('rentals.confirm');
         Route::post('/rentals/{rental}/ongoing', [Admin\RentalController::class, 'markOngoing'])->name('rentals.ongoing');
         Route::post('/rentals/{rental}/return', [Admin\RentalController::class, 'confirmReturn'])->name('rentals.return');
         Route::post('/rentals/{rental}/cancel', [Admin\RentalController::class, 'cancel'])->name('rentals.cancel');

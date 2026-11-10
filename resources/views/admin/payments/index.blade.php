@@ -50,7 +50,7 @@
                             <th class="py-3.5 px-4">Jumlah Transfer</th>
                             <th class="py-3.5 px-4">Bukti Struk</th>
                             <th class="py-3.5 px-4">Status</th>
-                            <th class="py-3.5 px-4 text-right">Tindakan Admin</th>
+                            <th class="py-3.5 px-4 text-center">Tindakan Admin</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -80,11 +80,11 @@
                                 <td class="py-4 px-4">
                                     @if($tx->bukti_pembayaran)
                                         <a href="{{ route('files.payment_proof', $tx) }}" target="_blank"
-                                           class="inline-flex items-center text-blue-600 hover:underline font-bold text-xs bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                                           class="inline-flex items-center whitespace-nowrap text-blue-600 hover:underline font-bold text-xs bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
                                             <i data-lucide="image" class="w-3.5 h-3.5 mr-1"></i> Buka Struk
                                         </a>
                                     @else
-                                        <span class="text-slate-400 italic">Tanpa Struk</span>
+                                        <span class="text-slate-400 italic whitespace-nowrap">Tanpa Struk</span>
                                     @endif
                                 </td>
                                 <td class="py-4 px-4">
@@ -97,7 +97,7 @@
                                 </td>
                                 <td class="py-4 px-4 text-right space-x-1 whitespace-nowrap">
                                     @if($tx->status === 'pending')
-                                        <form method="POST" action="{{ route('admin.payments.confirm', $tx) }}" class="inline">
+                                        <form method="POST" action="{{ route('admin.payments.confirm', $tx) }}" class="inline" onsubmit="return swalConfirmPayment(this, 'Konfirmasi pembayaran #TRX-{{ $tx->id }}?', 'Transaksi akan ditandai berhasil dan status sewa akan diperbarui.')">
                                             @csrf
                                             <button type="submit" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-sm">
                                                 Konfirmasi
@@ -124,35 +124,35 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @else
-                                        <span class="text-slate-400 text-xs italic mr-1">Diproses</span>
                                     @endif
 
-                                    <a href="{{ route('admin.payments.edit', $tx) }}"
-                                       class="inline-flex px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition border border-slate-200">
-                                        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
-                                    </a>
+                                    @if($tx->status === 'pending')
+                                        <a href="{{ route('admin.payments.edit', $tx) }}"
+                                           class="inline-flex px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition border border-slate-200">
+                                            <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                                        </a>
 
-                                    <div class="inline" x-data="{ open: false }">
-                                        <button @click="open = true" class="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs transition border border-red-200">
-                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                                        </button>
+                                        <div class="inline" x-data="{ open: false }">
+                                            <button @click="open = true" class="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs transition border border-red-200">
+                                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                            </button>
 
-                                        <div x-show="open" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4">
-                                            <div @click.outside="open = false" class="bg-white rounded-2xl max-w-sm w-full p-5 text-left space-y-4">
-                                                <h3 class="text-sm font-bold text-slate-900">Hapus Transaksi #TRX-{{ $tx->id }}?</h3>
-                                                <p class="text-xs text-slate-500">Data pembayaran dan bukti struk akan dihapus permanen.</p>
-                                                <form method="POST" action="{{ route('admin.payments.destroy', $tx) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="flex justify-end gap-2">
-                                                        <button type="button" @click="open = false" class="px-3 py-1.5 text-xs text-slate-500 font-bold">Batal</button>
-                                                        <button type="submit" class="px-4 py-1.5 text-xs bg-red-600 text-white font-bold rounded-lg">Hapus</button>
-                                                    </div>
-                                                </form>
+                                            <div x-show="open" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4">
+                                                <div @click.outside="open = false" class="bg-white rounded-2xl max-w-sm w-full p-5 text-left space-y-4">
+                                                    <h3 class="text-sm font-bold text-slate-900">Hapus Transaksi #TRX-{{ $tx->id }}?</h3>
+                                                    <p class="text-xs text-slate-500">Data pembayaran dan bukti struk akan dihapus permanen.</p>
+                                                    <form method="POST" action="{{ route('admin.payments.destroy', $tx) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="flex justify-end gap-2">
+                                                            <button type="button" @click="open = false" class="px-3 py-1.5 text-xs text-slate-500 font-bold">Batal</button>
+                                                            <button type="submit" class="px-4 py-1.5 text-xs bg-red-600 text-white font-bold rounded-lg">Hapus</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -173,3 +173,28 @@
     @endif
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function swalConfirmPayment(form, title, html) {
+        event.preventDefault();
+        Swal.fire({
+            title: title,
+            html: html,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Konfirmasi',
+            cancelButtonText: 'Batal',
+            confirmButtonColor: '#059669',
+            cancelButtonColor: '#64748b',
+            reverseButtons: true,
+            focusCancel: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+</script>
+@endpush

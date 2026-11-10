@@ -22,7 +22,7 @@
             @method('PUT')
 
             <div>
-                <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Nama Lengkap</label>
+                <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Nama Lengkap <span class="text-red-500 ml-0.5">*</span></label>
                 <input type="text" name="nama" value="{{ old('nama', $user->nama) }}" required
                        class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                 @error('nama') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
@@ -30,14 +30,14 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Alamat Email</label>
+                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Alamat Email <span class="text-red-500 ml-0.5">*</span></label>
                     <input type="email" name="email" value="{{ old('email', $user->email) }}" required
                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                     @error('email') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Nomor Telepon / WhatsApp</label>
+                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Nomor Telepon / WhatsApp <span class="text-red-500 ml-0.5">*</span></label>
                     <input type="text" name="no_tlpn" value="{{ old('no_tlpn', $user->no_tlpn) }}" required
                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                     @error('no_tlpn') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
@@ -46,17 +46,18 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Role / Peran</label>
-                    <select name="role" required
-                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Role / Peran <span class="text-red-500 ml-0.5">*</span></label>
+                    <select name="role" required disabled
+                            class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm bg-slate-50 focus:ring-2 focus:ring-blue-600 focus:outline-none cursor-not-allowed">
                         <option value="penyewa" {{ old('role', $user->role) === 'penyewa' ? 'selected' : '' }}>Penyewa</option>
                         <option value="pemilik" {{ old('role', $user->role) === 'pemilik' ? 'selected' : '' }}>Mitra Pemilik</option>
                         <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>Administrator</option>
                     </select>
+                    <p class="text-[11px] text-slate-400 mt-1">Role tidak dapat diubah pada form ini.</p>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Status Akun</label>
+                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Status Akun <span class="text-red-500 ml-0.5">*</span></label>
                     <select name="is_active" required
                             class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">
                         <option value="1" {{ old('is_active', $user->is_active ? '1' : '0') === '1' ? 'selected' : '' }}>Aktif</option>
@@ -66,7 +67,7 @@
             </div>
 
             <div>
-                <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Ganti Password (Kosongkan jika tidak diubah)</label>
+                <label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Ganti Password <span class="normal-case font-normal text-slate-400 text-[11px]">(opsional, kosongkan jika tidak diubah)</span></label>
                 <input type="password" name="password" minlength="8"
                        placeholder="Minimal 8 karakter"
                        class="w-full px-3.5 py-2.5 border rounded-xl border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none">

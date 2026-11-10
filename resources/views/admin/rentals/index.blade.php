@@ -58,7 +58,7 @@
                         <th class="py-3.5 px-4">Periode Sewa</th>
                         <th class="py-3.5 px-4">Total Biaya</th>
                         <th class="py-3.5 px-4">Status</th>
-                        <th class="py-3.5 px-4 text-right">Aksi Operasional</th>
+                        <th class="py-3.5 px-4 text-center">Aksi Operasional</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -98,14 +98,7 @@
                                 </span>
                             </td>
                             <td class="py-4 px-4 text-right space-x-1 whitespace-nowrap">
-                                @if($rental->status === 'menunggu_konfirmasi')
-                                    <form method="POST" action="{{ route('admin.rentals.confirm', $rental) }}" class="inline">
-                                        @csrf
-                                        <button type="submit" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition">
-                                            Konfirmasi
-                                        </button>
-                                    </form>
-                                @elseif($rental->status === 'berjalan')
+                                @if($rental->status === 'berjalan')
                                     <form method="POST" action="{{ route('admin.rentals.return', $rental) }}" class="inline"
                                           onsubmit="return confirm('Konfirmasi pengembalian unit motor? Status sewa akan ditandai selesai dan sistem otomatis mencatat bagi hasil.')">
                                         @csrf

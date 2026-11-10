@@ -6,10 +6,15 @@
 <div class="space-y-6">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Laporan Pendapatan Platform</h1>
-            <p class="text-sm text-slate-500 mt-1">Rekapitulasi seluruh transaksi pembayaran sewa yang telah diverifikasi lunas.</p>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold text-blue-400 border border-emerald-500 mb-3">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1.5"></i> Laporan Pendapatan
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Laporan Pendapatan Platform</h1>
+            <p class="text-slate-400 text-sm mt-1 max-w-xl">
+                Rekapitulasi seluruh transaksi pembayaran sewa yang telah diverifikasi lunas.
+            </p>
         </div>
-        <button onclick="window.print()" class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
+        <button onclick="window.print()" class="inline-flex items-center px-4 py-2 bg-white border border-emerald-500 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
             <i data-lucide="printer" class="w-4 h-4 mr-1.5"></i> Cetak Laporan
         </button>
     </div>
@@ -41,13 +46,13 @@
     </div>
 
     <!-- Summary Total Card -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-6 text-white shadow-lg flex items-center justify-between">
+    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-blue-200 block">Total Pendapatan Terverifikasi</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block">Total Pendapatan Terverifikasi</span>
             <div class="text-3xl font-black mt-1">{{ rupiah($totalRevenue) }}</div>
-            <p class="text-xs text-blue-100 mt-1">Periode: {{ tanggal_id($startDate) }} s/d {{ tanggal_id($endDate) }} ({{ $transactions->total() }} transaksi)</p>
+            <p class="text-xs text-slate-500 mt-1">Periode: {{ tanggal_id($startDate) }} s/d {{ tanggal_id($endDate) }} ({{ $transactions->total() }} transaksi)</p>
         </div>
-        <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+        <div class="inline-flex w-14 h-14 rounded-2xl border border-emerald-500 flex items-center justify-center text-emerald-500 backdrop-blur-sm">
             <i data-lucide="trending-up" class="w-7 h-7"></i>
         </div>
     </div>

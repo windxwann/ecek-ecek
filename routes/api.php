@@ -65,11 +65,9 @@ $registerRoutes = function (): void {
             Route::patch('/motors/{motor}/pricing', [AdminController::class, 'updatePricing']);
 
             Route::get('/bookings', [AdminController::class, 'rentals']);
-            Route::patch('/bookings/{rental}/confirm', [AdminController::class, 'confirmRental']);
             Route::patch('/bookings/{rental}/return', [AdminController::class, 'returnRental']);
 
             Route::get('/rentals', [AdminController::class, 'rentals']);
-            Route::patch('/rentals/{rental}/confirm', [AdminController::class, 'confirmRental']);
             Route::patch('/rentals/{rental}/return', [AdminController::class, 'returnRental']);
 
             Route::get('/payments', [AdminController::class, 'payments']);
