@@ -21,6 +21,11 @@
             <p class="mt-1 text-sm text-slate-500">
                 @yield('subheading', 'Platform rental motor modern dan terpercaya')
             </p>
+
+            <a href="{{ route('home') }}"
+               class="mt-4 inline-flex items-center text-xs font-semibold text-slate-500 hover:text-emerald-600 hover:underline">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5 mr-1.5"></i> Kembali ke Beranda
+            </a>
         </div>
     </div>
 
@@ -58,6 +63,11 @@
                         <span>Konfirmasi pembayaran cepat oleh admin</span>
                     </div>
                 </div>
+
+                <a href="{{ route('home') }}"
+                   class="mt-8 sm:mt-10 inline-flex items-center text-xs font-semibold text-emerald-100 hover:text-white hover:underline">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5 mr-1.5"></i> Kembali ke Beranda
+                </a>
             </div>
 
             <!-- Decorative element -->
